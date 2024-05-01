@@ -52,6 +52,17 @@ async def mypersonalwebsite(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         ),
     )
 
+async def aivest(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text(
+        "Open Me!",
+        reply_markup=ReplyKeyboardMarkup.from_button(
+            KeyboardButton(
+                text="Interact with us",
+                web_app=WebAppInfo(url="https://aivestdao-chatbot.streamlit.app/01"),
+            )
+        ),
+    )
+
 # Handle incoming WebAppData
 async def web_app_data(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Print the received data and remove the button."""
@@ -74,6 +85,7 @@ def main() -> None:
     application.add_handler(CommandHandler("colorpicker", colorpicker))
     application.add_handler(MessageHandler(filters.StatusUpdate.WEB_APP_DATA, web_app_data))
     application.add_handler(CommandHandler("website", mypersonalwebsite))
+    application.add_handler(CommandHandler("aivest", aivest))
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling(allowed_updates=Update.ALL_TYPES)
